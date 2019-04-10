@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -39,12 +40,24 @@ public class Controller implements Initializable {
         if(selectedDirectory != null){
             if (event.getSource().equals(inputDirectoryChooser)) {
                 this.inputDirectory = selectedDirectory.getAbsolutePath();
-                inputDirectoryLabel.setText(this.inputDirectory);
+                inputDirectoryLabel.setText(this.inputDirectory); // check for at least 1 image
             }
             if (event.getSource().equals(outputDirectoryChooser)) {
                 this.outputDirectory = selectedDirectory.getAbsolutePath();
                 outputDirectoryLabel.setText(this.outputDirectory);
             }
+        }
+    }
+
+    @FXML
+    private void openFileChooser(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        if(selectedFile != null){
+            System.out.print(selectedFile);
+            // validations:
+            // in input folder
+            // is of apt format
         }
     }
 }

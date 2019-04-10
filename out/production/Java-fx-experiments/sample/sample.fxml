@@ -8,7 +8,8 @@
     <children>
         <Button fx:id="inputDirectoryChooser" defaultButton="true" layoutX="231.0" layoutY="135.0" mnemonicParsing="false" onAction="#openDirectoryChooser" text="Choose Input directory" />
         <Label fx:id="inputDirectoryLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="168.0" layoutY="98.0" prefHeight="17.0" prefWidth="264.0" text="No input directory selected" textAlignment="CENTER" />
-        <Label fx:id="outputDirectoryLabel" layoutX="228.0" layoutY="200.0" text="No output directory selected" />
-        <Button fx:id="outputDirectoryChooser" defaultButton="true" layoutX="227.0" layoutY="244.0" mnemonicParsing="false" onAction="#openDirectoryChooser" text="Choose output directory" />
+        <Label fx:id="outputDirectoryLabel" layoutX="224.0" layoutY="258.0" text="No output directory selected" />
+        <Button fx:id="outputDirectoryChooser" defaultButton="true" layoutX="223.0" layoutY="302.0" mnemonicParsing="false" onAction="#openDirectoryChooser" text="Choose output directory" />
+        <Button fx:id="inputDirectoryChooser" defaultButton="true" layoutX="237.0" layoutY="188.0" mnemonicParsing="false" onAction="#openFileChooser" text="Select preview image" />
     </children>
 </AnchorPane>
