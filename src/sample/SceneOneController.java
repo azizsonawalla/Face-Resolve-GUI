@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -13,7 +14,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class SceneOneController implements Initializable {
 
     @FXML
     private Stage stage;
@@ -26,11 +27,16 @@ public class Controller implements Initializable {
     @FXML private Label outputDirectoryLabel;
     @FXML private Button inputDirectoryChooser;
     @FXML private Button outputDirectoryChooser;
+    @FXML private CheckBox autoChoosePreviewImage;
+    @FXML private Button previewImageChooser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inputDirectoryLabel.setText(this.inputDirectory);
         outputDirectoryLabel.setText(this.outputDirectory);
+        autoChoosePreviewImage.setAllowIndeterminate(false);
+        autoChoosePreviewImage.setSelected(true);
+        previewImageChooser.setDisable(true);
     }
 
     @FXML
@@ -58,6 +64,17 @@ public class Controller implements Initializable {
             // validations:
             // in input folder
             // is of apt format
+        }
+    }
+
+    @FXML
+    private void setPreviewSource(ActionEvent event){
+        if (autoChoosePreviewImage.isSelected()) {
+            System.out.print("Will auto choose preview image\r");
+            previewImageChooser.setDisable(true);
+        } else {
+            System.out.print("Will manually choose preview image\r");
+            previewImageChooser.setDisable(false);
         }
     }
 }
