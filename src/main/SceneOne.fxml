@@ -9,10 +9,11 @@
     <children>
         <Button fx:id="inputDirectoryChooser" defaultButton="true" layoutX="232.0" layoutY="93.0" mnemonicParsing="false" onAction="#openDirectoryChooser" text="Choose Input directory" />
         <Label fx:id="inputDirectoryLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="169.0" layoutY="56.0" prefHeight="17.0" prefWidth="264.0" text="No input directory selected" textAlignment="CENTER" />
-        <Label fx:id="outputDirectoryLabel" layoutX="224.0" layoutY="258.0" text="No output directory selected" />
-        <Button fx:id="outputDirectoryChooser" defaultButton="true" layoutX="223.0" layoutY="302.0" mnemonicParsing="false" onAction="#openDirectoryChooser" text="Choose output directory" />
-        <Button fx:id="previewImageChooser" defaultButton="true" layoutX="237.0" layoutY="188.0" mnemonicParsing="false" onAction="#openFileChooser" text="Select preview image" />
-        <CheckBox fx:id="autoChoosePreviewImage" layoutX="136.0" layoutY="147.0" mnemonicParsing="false" onAction="#setPreviewSource" text="Automatically select a preview image from the source directory" />
-      <Button layoutX="518.0" layoutY="352.0" mnemonicParsing="false" text="Next" />
+        <Label fx:id="outputDirectoryLabel" layoutX="224.0" layoutY="312.0" text="No output directory selected" />
+        <Button fx:id="outputDirectoryChooser" defaultButton="true" layoutX="223.0" layoutY="356.0" mnemonicParsing="false" onAction="#openDirectoryChooser" text="Choose output directory" />
+        <Button fx:id="previewImageChooser" defaultButton="true" layoutX="237.0" layoutY="242.0" mnemonicParsing="false" onAction="#openFileChooser" text="Select preview image" />
+        <CheckBox fx:id="autoChoosePreviewImage" layoutX="136.0" layoutY="201.0" mnemonicParsing="false" onAction="#setPreviewSource" text="Automatically select a preview image from the source directory" />
+        <Button layoutX="518.0" layoutY="406.0" mnemonicParsing="false" text="Next" />
+        <Label fx:id="inputDirectoryValidationStatus" layoutX="423.0" layoutY="97.0" prefHeight="17.0" prefWidth="308.0" text="" />
     </children>
 </AnchorPane>
