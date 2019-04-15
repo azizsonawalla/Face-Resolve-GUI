@@ -1,4 +1,4 @@
-package sample;
+package main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +12,8 @@ public class Main extends Application {
 
     // Application Configuration
     private String APP_NAME = "Face Resolve";
-    private int APP_WIDTH = 800;
-    private int APP_HEIGHT = 600;
+    private int APP_WIDTH = 1000;
+    private int APP_HEIGHT = 700;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -21,7 +21,9 @@ public class Main extends Application {
         loader.setController(new SceneOneController());
         Pane root = loader.load();
         primaryStage.setTitle(APP_NAME);
-        primaryStage.setScene(new Scene(root, APP_WIDTH, APP_HEIGHT));
+        Scene scene = new Scene(root, APP_WIDTH, APP_HEIGHT);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
