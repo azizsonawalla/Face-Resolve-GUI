@@ -6,17 +6,21 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static main.AppConfigConstants.*;
+
 public class Main extends Application {
 
     private String FXML_FILE = "SceneOne.fxml";
 
-    // Application Configuration
-    private String APP_NAME = "Face Resolve";
-    private int APP_WIDTH = 1000;
-    private int APP_HEIGHT = 700;
+    private Stage primaryStage;
+    private Map<Integer,Scene> scenes = new HashMap<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        this.primaryStage = primaryStage;
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_FILE));
         loader.setController(new SceneOneController());
         Pane root = loader.load();
@@ -25,6 +29,16 @@ public class Main extends Application {
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void showScene(int sceneNumber) {
+        primaryStage.setScene(scenes.get(sceneNumber));
+        primaryStage.show();
+    }
+
+    private Scene createSceneOne() {
+        return null;
+        // TODO!
     }
 
     public static void main(String[] args) {

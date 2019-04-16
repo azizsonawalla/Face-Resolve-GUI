@@ -16,15 +16,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import org.apache.commons.io.FilenameUtils;
+import static main.AppConfigConstants.*;
 
 public class SceneOneController implements Initializable {
 
-    @FXML
-    private Stage stage;
-
+    // User configuration
     private String inputDirectory = "No input directory selected";
     private String outputDirectory = "No output directory selected";
-    private ArrayList<String> inputImagePaths = new ArrayList<>();
+    private ArrayList<String> inputImagePaths;
 
     // UI Elements
     @FXML private Label inputDirectoryLabel;
@@ -34,9 +33,7 @@ public class SceneOneController implements Initializable {
     @FXML private CheckBox autoChoosePreviewImage;
     @FXML private Button previewImageChooser;
     @FXML private Label inputDirectoryValidationStatus;
-
-    // App Config
-    private final ArrayList<String> supportedFileTypes = new ArrayList<>();
+    @FXML private Stage stage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,8 +42,6 @@ public class SceneOneController implements Initializable {
         autoChoosePreviewImage.setAllowIndeterminate(false);
         autoChoosePreviewImage.setSelected(true);
         previewImageChooser.setDisable(true);
-
-        supportedFileTypes.add("jpeg");
     }
 
     @FXML
@@ -54,21 +49,27 @@ public class SceneOneController implements Initializable {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File selectedDirectory = directoryChooser.showDialog(stage);
         if(selectedDirectory != null){
+
+            // input directory chooser
             if (event.getSource().equals(inputDirectoryChooser)) {
+                inputImagePaths = new ArrayList<>();
                 this.inputDirectory = selectedDirectory.getAbsolutePath();
                 inputDirectoryLabel.setText(this.inputDirectory);
                 inputDirectoryValidationStatus.setTextFill(new Color(1.0,1.0,1.0,0.5));
                 inputDirectoryValidationStatus.setText("Checking...");
                 String validationResult = inputDirectoryValidator(this.inputDirectory);
-                if (validationResult != "") {
-                    inputDirectoryValidationStatus.setTextFill(new Color(1.0,0,0,1.0));
-                    inputDirectoryValidationStatus.setText(validationResult);
-                } else {
+                if (validationResult.equals("")) {
                     inputDirectoryValidationStatus.setTextFill(new Color(0.0,1.0,0,0.8));
                     int numberOfDiscoveredImages = inputImagePaths.size();
                     inputDirectoryValidationStatus.setText(String.format("Found %d images", numberOfDiscoveredImages));
+                    // load preview image
+                } else {
+                    inputDirectoryValidationStatus.setTextFill(new Color(1.0,0,0,1.0));
+                    inputDirectoryValidationStatus.setText(validationResult);
                 }
             }
+
+            // output directory chooser
             if (event.getSource().equals(outputDirectoryChooser)) {
                 this.outputDirectory = selectedDirectory.getAbsolutePath();
                 outputDirectoryLabel.setText(this.outputDirectory);
@@ -111,7 +112,7 @@ public class SceneOneController implements Initializable {
         for (int i = 0; i < listOfFiles.length; i++) {
             String imagePath = listOfFiles[i].getAbsolutePath();
             String fileExtention = FilenameUtils.getExtension(imagePath);
-            if (listOfFiles[i].isFile() && supportedFileTypes.contains(fileExtention)) {
+            if (listOfFiles[i].isFile() && SUPPORTED_FILE_TYPES.contains(fileExtention.toUpperCase())) {
                 inputImagePaths.add(imagePath);
             }
         }
