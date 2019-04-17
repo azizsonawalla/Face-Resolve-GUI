@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,32 +14,36 @@ import static main.AppConfigConstants.*;
 
 public class Main extends Application {
 
-    private String FXML_FILE = "SceneOne.fxml";
-
     private Stage primaryStage;
-    private Map<Integer,Scene> scenes = new HashMap<>();
+    private Map<Integer,SceneHolder> sceneHolders = new HashMap<>();
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        this.primaryStage = primaryStage;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_FILE));
-        loader.setController(new SceneOneController());
-        Pane root = loader.load();
+    public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle(APP_NAME);
+        this.primaryStage = primaryStage;
+
+        createScenes();
+        showScene(1);
+    }
+
+    private void showScene(int sceneNumber) throws IOException {
+        SceneHolder sceneHolder = sceneHolders.get(sceneNumber);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneHolder.getFxml()));
+        loader.setController(sceneHolder.getController());
+        Pane root = loader.load();
         Scene scene = new Scene(root, APP_WIDTH, APP_HEIGHT);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource(sceneHolder.getStyleCss()).toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
+        sceneHolder.setScene(scene);
+        sceneHolders.put(sceneNumber, sceneHolder);
     }
 
-    private void showScene(int sceneNumber) {
-        primaryStage.setScene(scenes.get(sceneNumber));
-        primaryStage.show();
-    }
+    private void createScenes() {
+        SceneHolder sceneHolder = new SceneHolder(new SceneOneController(), "style.css", "SceneOne.fxml");
+        sceneHolders.put(1, sceneHolder);
 
-    private Scene createSceneOne() {
-        return null;
-        // TODO!
+        //create other scenes TODO
     }
 
     public static void main(String[] args) {

@@ -18,6 +18,11 @@ import java.util.ResourceBundle;
 import org.apache.commons.io.FilenameUtils;
 import static main.AppConfigConstants.*;
 
+// TODO list:
+// - Move colours to constants
+// - Add functionality to 'Next' button
+// - Add styling to scene
+
 public class SceneOneController implements Initializable {
 
     // User configuration
